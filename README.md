@@ -12,3 +12,7 @@ This will install jQuery, Twitter Bootstrap and Handlebars.
 
 Make sure you place the `log.json` in the same directory as the `index.html` 
 file and view the URL in your browser.
+
+# Configuration
+Copy the `config/config.js.default` to `config/config.js` and modify the URL 
+according to your setup to create direct links to the originating JANUS entry.

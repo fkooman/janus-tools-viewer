@@ -4,10 +4,12 @@ $(document).ready(function () {
         var template = Handlebars.compile(source);
 
         var idpLog = template({
-            entities: data['saml20-idp']
+            entities: data['saml20-idp'],
+            janusUrlPrefix: janusUrlPrefix
         });
         var spLog = template({
-            entities: data['saml20-sp']
+            entities: data['saml20-sp'],
+            janusUrlPrefix: janusUrlPrefix
         });
         $("#idpLog").html(idpLog);
         $("#spLog").html(spLog);

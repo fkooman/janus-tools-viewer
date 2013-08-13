@@ -5,6 +5,7 @@
     <title>Log</title>
     <script src="bower_components/jquery/jquery.min.js"></script>
     <script src="bower_components/handlebars/handlebars.js"></script>
+    <script src="config/config.js"></script>
     <script src="js/app.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap -->
@@ -17,7 +18,7 @@
             <tr><th>Entity ID</th><th>Log</th></tr>
             {{#each entities}}
                 <tr>
-                <td>{{@key}}</td>
+                <td><a href="{{../janusUrlPrefix}}{{eid}}" target="_blank">{{name}}</a><br><small>{{@key}}</small></td>
                 <td><ul>
                 {{#each messages}}
                     <li>{{message}}</li>
