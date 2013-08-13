@@ -13,7 +13,11 @@
 </head>
 
 <body>
-    <script id="entry-template" type="text/x-handlebars-template">
+    <script id="header-template" type="text/x-handlebars-template">
+        <span>This log was generated at {{generatedAt}}</span>
+    </script>
+    
+    <script id="log-template" type="text/x-handlebars-template">
         <table class="table table-bordered table-striped">
             <tr><th>Entity ID</th><th>Log</th></tr>
             {{#each entities}}
@@ -30,6 +34,8 @@
     </script>
 
     <h1>Log</h1>
+    <div id="header"></div>
+    
     <h3>IdPs</h3>
     <div id="idpLog"></div>
     

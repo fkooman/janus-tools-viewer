@@ -1,16 +1,25 @@
 $(document).ready(function () {
     $.when($.ajax("log.json")).then(function (data, textStatus, jqXHR) {
-        var source = $("#entry-template").html();
-        var template = Handlebars.compile(source);
+        var logSource = $("#log-template").html();
+        var logTemplate = Handlebars.compile(logSource);
 
-        var idpLog = template({
+        var headerSource = $("#header-template").html();
+        var headerTemplate = Handlebars.compile(headerSource);
+        
+        var idpLog = logTemplate({
             entities: data['saml20-idp'],
             janusUrlPrefix: janusUrlPrefix
         });
-        var spLog = template({
+        var spLog = logTemplate({
             entities: data['saml20-sp'],
             janusUrlPrefix: janusUrlPrefix
         });
+        
+        var header = headerTemplate({
+            generatedAt: data['generatedAt']
+        });
+        
+        $("#header").html(header);
         $("#idpLog").html(idpLog);
         $("#spLog").html(spLog);
     });
