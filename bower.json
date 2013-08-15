@@ -4,6 +4,6 @@
         "handlebars": "git://github.com/components/handlebars.js.git#~1.0.0", 
         "jquery": "git://github.com/components/jquery.git#~2.0.3"
     }, 
-    "name": "viewer", 
-    "version": "0.0.0"
+    "name": "janus-tools-viewer", 
+    "version": "0.1.0"
 }
