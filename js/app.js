@@ -20,12 +20,20 @@ $(document).ready(function () {
         var headerSource = $("#header-template").html();
         var headerTemplate = Handlebars.compile(headerSource);
 
-        var idpLog = logTemplate({
-            entities: data['saml20-idp'],
+        var prodIdpLog = logTemplate({
+            entities: data['prodaccepted']['saml20-idp'],
             janusUrlPrefix: janusUrlPrefix
         });
-        var spLog = logTemplate({
-            entities: data['saml20-sp'],
+        var prodSpLog = logTemplate({
+            entities: data['prodaccepted']['saml20-sp'],
+            janusUrlPrefix: janusUrlPrefix
+        });
+        var testIdpLog = logTemplate({
+            entities: data['testaccepted']['saml20-idp'],
+            janusUrlPrefix: janusUrlPrefix
+        });
+        var testSpLog = logTemplate({
+            entities: data['testaccepted']['saml20-sp'],
             janusUrlPrefix: janusUrlPrefix
         });
 
@@ -34,7 +42,9 @@ $(document).ready(function () {
         });
 
         $("#header").html(header);
-        $("#idpLog").html(idpLog);
-        $("#spLog").html(spLog);
+        $("#prodIdpLog").html(prodIdpLog);
+        $("#prodSpLog").html(prodSpLog);
+        $("#testIdpLog").html(testIdpLog);
+        $("#testSpLog").html(testSpLog);
     });
 });
