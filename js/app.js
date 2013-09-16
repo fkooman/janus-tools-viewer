@@ -42,10 +42,12 @@ $(document).ready(function () {
         });
 
         var idpLog = logTemplate({
+            type: 'saml20_idp',
             entities: idpEntities,
             janusUrlPrefix: janusUrlPrefix
         });
         var spLog = logTemplate({
+            type: 'saml20_sp',
             entities: spEntities,
             janusUrlPrefix: janusUrlPrefix
         });
