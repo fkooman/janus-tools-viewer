@@ -18,11 +18,13 @@
     </script>
     
     <script id="log-template" type="text/x-handlebars-template">
+        {{#each entities}}
+        <h3>{{@key}}</h3>
         <table class="table table-bordered table-striped">
             <tr><th>Entity ID</th><th>Log</th></tr>
-            {{#each entities}}
+            {{#each this}}
                 <tr>
-                <td><a href="{{../janusUrlPrefix}}{{eid}}" target="_blank">{{name}}</a><br><small>{{@key}}</small></td>
+                <td><a href="{{../janusUrlPrefix}}{{eid}}" target="_blank">{{name}}</a><br><small>{{entityid}}</small></td>
                 <td><ul>
                 {{#each messages}}
                     <li>{{logMessage message level}} <small class="text-muted">[{{module}}]</small></li>
@@ -31,16 +33,16 @@
                 </tr>
             {{/each}}
         </table>
+        {{/each}}
     </script>
 
     <h1>Log</h1>
     <div id="header"></div>
     
-    <h3>IdPs</h3>
+    <h2>IdPs</h2>
     <div id="idpLog"></div>
     
-    <h3>SPs</h3>
+    <h2>SPs</h2>
     <div id="spLog"></div>
-    
 </body>
 </html>

@@ -20,12 +20,33 @@ $(document).ready(function () {
         var headerSource = $("#header-template").html();
         var headerTemplate = Handlebars.compile(headerSource);
 
+        var idpEntities = {};
+        var spEntities = {};
+
+        // separate the entities based on their workflow state
+        $.each(data['saml20-idp'], function(k, v) {
+            if (!idpEntities[v.state]) {
+                idpEntities[v.state] = [];
+            }
+            v.entityid = k;
+            idpEntities[v.state].push(v);
+        });
+
+        // separate the entities based on their workflow state
+        $.each(data['saml20-sp'], function(k, v) {
+            if (!spEntities[v.state]) {
+                spEntities[v.state] = [];
+            }
+            v.entityid = k;
+            spEntities[v.state].push(v);
+        });
+
         var idpLog = logTemplate({
-            entities: data['saml20-idp'],
+            entities: idpEntities,
             janusUrlPrefix: janusUrlPrefix
         });
         var spLog = logTemplate({
-            entities: data['saml20-sp'],
+            entities: spEntities,
             janusUrlPrefix: janusUrlPrefix
         });
 
