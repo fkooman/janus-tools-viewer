@@ -1,1 +1,2 @@
 var janusUrlPrefix = "https://janus.example.org/simplesaml/module.php/janus/editentity.php?eid=";
+var showWorkflowErrors = ['prodaccepted', 'testaccepted'];
