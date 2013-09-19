@@ -1,2 +1,11 @@
+// the URL to use as a base for redirecting to JANUS
 var janusUrlPrefix = "https://janus.example.org/simplesaml/module.php/janus/editentity.php?eid=";
-var showWorkflowErrors = ['prodaccepted', 'testaccepted'];
+
+// only show the entries with one of the below workflow states
+var filterState = [
+    "testaccepted",
+    "QApending",
+    "QAaccepted",
+    "prodpending",
+    "prodaccepted"
+];

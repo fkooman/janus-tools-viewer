@@ -14,36 +14,25 @@
 
 <body>
     <script id="header-template" type="text/x-handlebars-template">
-        <span>This log was generated at {{generatedAt}}</span>
+        <p><span>This log was generated at {{generatedAt}}</span></p>
+        <ul>
+            <li><a href="#idpHeader">IdPs</a></li>
+            <li><a href="#spHeader">SPs</a></li>
+        </ul>
     </script>
     
-    <script id="errorLog-template" type="text/x-handlebars-template">
-        <h3>Error Log</h3>
-        <table class="table table-bordered table-striped">
-        {{#each errors}}
-            {{#each this}}
-            <tr>
-                <td><a href="#entity_{{eid}}">{{message}}</a></td>
-            </tr>
-            {{/each}}
-        {{/each}}
-        </table>
-    </script>
-
     <script id="log-template" type="text/x-handlebars-template">
-        <ul>
-        {{#each entities}}
-            <li><a href="#{{../type}}_{{@key}}">{{@key}}</a></li>
-        {{/each}}
-        </ul>
-
-        {{#each entities}}
-        <h3 id="{{../type}}_{{@key}}">{{@key}}</h3>
         <table class="table table-bordered table-striped">
-            <tr><th>Entity ID</th><th>Log</th></tr>
-            {{#each this}}
-                <tr id="entity_{{eid}}">
-                <td><a href="{{../../janusUrlPrefix}}{{eid}}" target="_blank">{{name}}</a><br><small>{{entityid}}</small></td>
+            <tr><th>Entity</th><th>Log</th></tr>
+            {{#each entities}}
+                <tr>
+                <td>
+                    <a href="{{../janusUrlPrefix}}{{eid}}" target="_blank">{{name}}</a>
+                    <br>
+                    <small>{{@key}}</small>
+                    <br>
+                    <small><strong>{{state}}</strong></small>
+                </td>
                 <td><ul>
                 {{#each messages}}
                     <li>{{logMessage message level}} <small class="text-muted">[{{module}}]</small></li>
@@ -52,26 +41,16 @@
                 </tr>
             {{/each}}
         </table>
-        {{/each}}
     </script>
 
-    <div class="container">
-        <h1>Log</h1>
-
-        <ul>
-            <li><a href="#idp">IdPs</a></li>
-            <li><a href="#sp">SPs</a></li>
-        </ul>    
-
-        <div id="header"></div>
-        
-        <h2 id="idp">IdPs</h2>
-        <div id="idpErrorLog"></div>
-        <div id="idpLog"></div>
-
-        <h2 id="sp">SPs</h2>
-        <div id="spErrorLog"></div>
-        <div id="spLog"></div>
-    </div>
+    <h1>Log</h1>
+    <div id="header"></div>
+    
+    <h3 id="idpHeader">IdPs</h3>
+    <div id="idpLog"></div>
+    
+    <h3 id="spHeader">SPs</h3>
+    <div id="spLog"></div>
+    
 </body>
 </html>

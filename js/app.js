@@ -20,62 +20,26 @@ $(document).ready(function () {
         var headerSource = $("#header-template").html();
         var headerTemplate = Handlebars.compile(headerSource);
 
-        var errorLogSource = $("#errorLog-template").html();
-        var errorLogTemplate = Handlebars.compile(errorLogSource);
-
-        var idpEntities = {};
-        var idpErrors = {};
-        var spEntities = {};
-        var spErrors = {};
-
-        // separate the entities based on their workflow state
+        var idpList = {};
         $.each(data['saml20-idp'], function(k, v) {
-            $.each(v.messages, function(k, m) {
-                if(20 === m.level) {
-                    if(0 <= $.inArray(v.state, showWorkflowErrors)) {
-                        if(!idpErrors[v.state]) {
-                            idpErrors[v.state] = [];
-                        }
-                        m.eid = v.eid;
-                        idpErrors[v.state].push(m);
-                    }
-                }
-            });
-            if (!idpEntities[v.state]) {
-                idpEntities[v.state] = [];
+            if(-1 !== filterState.indexOf(v['state'])) {
+                idpList[k] = v;
             }
-            v.entityid = k;
-            idpEntities[v.state].push(v);
         });
 
-        // separate the entities based on their workflow state
+        var spList = {};
         $.each(data['saml20-sp'], function(k, v) {
-            $.each(v.messages, function(k, m) {
-                if(20 === m.level) {
-                    if(0 <= $.inArray(v.state, showWorkflowErrors)) {
-                        if(!spErrors[v.state]) {
-                            spErrors[v.state] = [];
-                        }
-                        m.eid = v.eid;
-                        spErrors[v.state].push(m);
-                    }
-                }
-            });
-            if (!spEntities[v.state]) {
-                spEntities[v.state] = [];
+            if(-1 !== filterState.indexOf(v['state'])) {
+                spList[k] = v;
             }
-            v.entityid = k;
-            spEntities[v.state].push(v);
         });
 
         var idpLog = logTemplate({
-            type: 'saml20_idp',
-            entities: idpEntities,
+            entities: idpList,
             janusUrlPrefix: janusUrlPrefix
         });
         var spLog = logTemplate({
-            type: 'saml20_sp',
-            entities: spEntities,
+            entities: spList,
             janusUrlPrefix: janusUrlPrefix
         });
 
@@ -83,19 +47,7 @@ $(document).ready(function () {
             generatedAt: data['generatedAt']
         });
 
-        var idpErrorLog = errorLogTemplate({
-            errors: idpErrors
-        });
-
-        var spErrorLog = errorLogTemplate({
-            errors: spErrors
-        });
-
         $("#header").html(header);
-
-        $("#idpErrorLog").html(idpErrorLog);
-        $("#spErrorLog").html(spErrorLog);
-
         $("#idpLog").html(idpLog);
         $("#spLog").html(spLog);
     });
