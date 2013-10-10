@@ -38,6 +38,7 @@ $(document).ready(function () {
         var idpList = {};
         $.each(data['saml20-idp'], function(k, v) {
             if(!hashParameters.state || hashParameters.state === v['state']) {
+                // filter by log
                 if(hashParameters.log) {
                     var newMessages = [];
                     $.each(v['messages'], function(k2, v2) {
@@ -47,6 +48,19 @@ $(document).ready(function () {
                     });
                     v.messages = newMessages;
                 }
+
+                // filter by level
+                if(hashParameters.level) {
+                    var newMessages = [];
+                    $.each(v.messages, function(k2, v2) {
+                        if(hashParameters.level <= v2.level) {
+                            //alert(v2.level + ' added...');
+                            newMessages.push(v2);
+                        }
+                    });
+                    v.messages = newMessages;
+                }
+
                 if(0 !== v.messages.length) {
                     idpList[k] = v;
                 }
@@ -56,15 +70,29 @@ $(document).ready(function () {
         var spList = {};
         $.each(data['saml20-sp'], function(k, v) {
             if(!hashParameters.state || hashParameters.state === v['state']) {
+                // filter by log
                 if(hashParameters.log) {
                     var newMessages = [];
-                    $.each(v['messages'], function(k2, v2) {
+                    $.each(v.messages, function(k2, v2) {
                         if(hashParameters.log === v2.module) {
                             newMessages.push(v2);
                         }
                     });
                     v.messages = newMessages;
                 }
+
+                // filter by level
+                if(hashParameters.level) {
+                    var newMessages = [];
+                    $.each(v.messages, function(k2, v2) {
+                        if(hashParameters.level <= v2.level) {
+                            //alert(v2.level + ' added...');
+                            newMessages.push(v2);
+                        }
+                    });
+                    v.messages = newMessages;
+                }
+
                 if(0 !== v.messages.length) {
                     spList[k] = v;
                 }
