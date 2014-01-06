@@ -1,5 +1,5 @@
 # Introduction
-This is a viewer for [janus-tools](https://github.com/fkooman/janus-tools). It
+This is a viewer for [janus-tools](https://github.com/frkosurf/janus-tools). It
 can currently parse `log.json`.
 
 # Installation

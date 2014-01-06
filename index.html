@@ -32,6 +32,10 @@
                     <small>{{@key}}</small>
                     <br>
                     <small><strong>{{state}}</strong></small>
+                    {{#each contacts}}
+                        <br>
+                           {{email}}
+                    {{/each}}
                 </td>
                 <td><ul>
                 {{#each messages}}
